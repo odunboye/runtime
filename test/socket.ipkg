@@ -1,7 +1,7 @@
-package flux-async-socket-test
+package runtime-socket-test
 depends = elin
 sourcedir = "../src"
 main = TestSocket
 executable = flux-async-socket-test
 prebuild = "make -C .. test-libs"
-modules = Flux.Async.Core, Flux.Async.Runner, Flux.Async.Native, Flux.Async.Socket
+modules = Async.Core, Async.Runner, Async.Native, Async.Socket

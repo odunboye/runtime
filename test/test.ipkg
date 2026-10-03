@@ -1,8 +1,8 @@
-package flux-async-test
+package runtime-test
 depends = elin
 sourcedir = "../src"
 opts = "-i .."
 prebuild = "make -C .. test-libs"
 main = TestMain
 executable = flux-async-test
-modules = Flux.Async.Core, Flux.Async.Runner
+modules = Async.Core, Async.Runner

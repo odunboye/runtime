@@ -1,14 +1,14 @@
 -- Adapted from idris2-streams by Stefan Hoeck; see STREAMS_LICENSE.
 ||| Utilities for working with chunks of data.
 |||
-||| It is suggested to import this qualified `import Flux.Stream.Chunk as C` or
+||| It is suggested to import this qualified `import Stream.Chunk as C` or
 ||| via the catch-all module `FS` and use qualified names such
 ||| as `C.filter` for those functions that overlap with the ones
-||| from `Flux.Stream.Pull`.
-module Flux.Stream.Chunk
+||| from `Stream.Pull`.
+module Stream.Chunk
 
-import Flux.Stream.Core as P
-import Flux.Stream.Pull as P
+import Stream.Core as P
+import Stream.Pull as P
 import Data.List
 import Data.Maybe
 import Data.Nat

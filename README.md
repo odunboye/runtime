@@ -1,19 +1,25 @@
-# flux-async
+# runtime
 
-Flux's owned-task runtime for Idris2 on Chez, targeting macOS and Linux. It
+`runtime` was originally built inside [Flux](https://github.com/odunboye/flux)
+(as `flux-runtime`, itself an outright rename of the package's very first
+name, `flux-async`) and later moved back out to its own repo, since it has
+no Flux-specific dependencies. The module prefix changed from `Flux.Async.*`/
+`Flux.Stream.*` to `Async.*`/`Stream.*` as part of that move.
+
+An owned-task runtime for Idris2 on Chez, targeting macOS and Linux. It
 uses `elin` for typed errors and a small C shim for nonblocking sockets,
 readiness polling, monotonic time, and opt-in standalone signal supervision.
 It does not depend on `async`, `async-posix`, `streams`, or `streams-posix`.
 
 ## Build
 
-Install Pack and a C compiler, then run `pack build flux-async.ipkg`. The
+Install Pack and a C compiler, then run `pack build runtime.ipkg`. The
 package prebuild compiles the native library; Pack installs it alongside the
 Idris package so downstream executables can copy it into their app directory.
 
 ```idris
-import Flux.Async.Core
-import Flux.Async.Runner
+import Async.Core
+import Async.Runner
 
 main : IO ()
 main = do
@@ -51,19 +57,19 @@ owners, drains on a stop request, then cancels outstanding connections.
 `requestDrain` stops admission while letting existing tasks finish.
 `requestShutdown` also requests cancellation. Observe `hasStopped` before
 considering resources reclaimed. Library APIs never force process exit.
-`Flux.Async.Standalone` explicitly opts into process-wide SIGINT/SIGTERM
+`Async.Standalone` explicitly opts into process-wide SIGINT/SIGTERM
 handlers and an independent native watchdog; Flux's standalone runner gives
 requests 30 seconds to drain and cleanup another 5 seconds before exit 124.
 
 ## Streams
 
-`Flux.Stream` supplies `Pull Task`, typed error handling, chunk/byte
+`Stream` supplies `Pull Task`, typed error handling, chunk/byte
 combinators, and scoped resources. Early termination and caught errors close
 resources before their continuation runs. A scope cancels and joins children
 spawned by stream effects before releasing resources. Finished hooks and
 children are pruned from long-lived scopes.
 
-`Flux.Stream.Socket` supplies socket input/output, and `Flux.Stream.Posix`
+`Stream.Socket` supplies socket input/output, and `Stream.Posix`
 reads regular files on blocking workers. Pure combinators were adapted from
 Stefan Hoeck's idris2-streams; see `STREAMS_LICENSE`. The evaluator and its
 scope ownership are independent of that library's scheduler.

@@ -1,4 +1,4 @@
-module Flux.Async.Standalone
+module Async.Standalone
 
 %default total
 

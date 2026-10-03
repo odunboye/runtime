@@ -1,7 +1,7 @@
-module Flux.Async.Runner
+module Async.Runner
 
-import Flux.Async.Core
-import Flux.Async.Native
+import Async.Core
+import Async.Native
 import Data.IORef
 import Data.List
 import System

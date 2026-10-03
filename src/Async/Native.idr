@@ -1,4 +1,4 @@
-module Flux.Async.Native
+module Async.Native
 
 import System.FFI
 

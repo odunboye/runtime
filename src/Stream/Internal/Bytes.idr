@@ -1,5 +1,5 @@
 -- Adapted from idris2-streams by Stefan Hoeck; see STREAMS_LICENSE.
-module Flux.Stream.Internal.Bytes
+module Stream.Internal.Bytes
 
 import Data.Bits
 import Data.ByteString

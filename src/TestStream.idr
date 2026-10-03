@@ -1,9 +1,9 @@
 module TestStream
 
-import Flux.Async.Runner
+import Async.Runner
 import TestSupport
-import Flux.Stream.Resource as R
-import Flux.Stream.Pull as P
+import Stream.Resource as R
+import Stream.Pull as P
 import Data.IORef
 import System
 

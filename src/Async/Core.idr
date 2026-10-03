@@ -1,4 +1,4 @@
-module Flux.Async.Core
+module Async.Core
 
 import public Control.Monad.MCancel
 import public Data.Linear.ELift1

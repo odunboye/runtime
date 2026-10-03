@@ -1,4 +1,4 @@
-[custom.all.flux-async]
+[custom.all.runtime]
 type = "local"
 path = "."
-ipkg = "flux-async.ipkg"
+ipkg = "runtime.ipkg"

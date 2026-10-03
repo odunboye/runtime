@@ -1,6 +1,6 @@
-module Flux.Stream.Posix
+module Stream.Posix
 
-import public Flux.Stream
+import public Stream
 import public System.Posix.Dir
 import public System.Posix.File.Stats
 import public System.Posix.File.Type

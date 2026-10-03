@@ -1,8 +1,8 @@
-module Flux.Async.Server
+module Async.Server
 
-import Flux.Async.Core
-import Flux.Async.Runner
-import Flux.Async.Socket as S
+import Async.Core
+import Async.Runner
+import Async.Socket as S
 import Data.IORef
 import System.Clock
 import System.Concurrency

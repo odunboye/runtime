@@ -1,13 +1,13 @@
 -- Adapted from idris2-streams by Stefan Hoeck; see STREAMS_LICENSE.
 ||| Utilities for working with streams of byte arrays.
-module Flux.Stream.Bytes
+module Stream.Bytes
 
 import public Data.ByteString
 
 import Data.Buffer.Mutable
-import Flux.Stream.Internal.Bytes
-import Flux.Stream.Chunk
-import Flux.Stream.Pull
+import Stream.Internal.Bytes
+import Stream.Chunk
+import Stream.Pull
 
 %default total
 

@@ -1,7 +1,7 @@
-package flux-async-stream-test
+package runtime-stream-test
 depends = elin, bytestring, elab-util
 sourcedir = "../src"
 main = TestStream
 executable = flux-async-stream-test
 prebuild = "make -C .. test-libs"
-modules = Flux.Async.Core, Flux.Async.Runner, Flux.Async.Native, Flux.Stream.Core, Flux.Stream.Pull, Flux.Stream.Resource
+modules = Async.Core, Async.Runner, Async.Native, Stream.Core, Stream.Pull, Stream.Resource

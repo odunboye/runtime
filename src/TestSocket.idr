@@ -1,9 +1,9 @@
 module TestSocket
 
-import Flux.Async.Core
-import Flux.Async.Runner
+import Async.Core
+import Async.Runner
 import TestSupport
-import Flux.Async.Socket
+import Async.Socket
 import Data.IORef
 import System
 import System.File

@@ -1,6 +1,6 @@
-module Flux.Stream.Core
+module Stream.Core
 
-import public Flux.Async.Core
+import public Async.Core
 import Data.IORef
 import Data.List
 
@@ -100,7 +100,7 @@ prune (h :: hs) = do
 
 trackChildren : Scope Task -> List (Fiber [] ()) -> Task es ()
 trackChildren _ [] = pure ()
-trackChildren scope children = Flux.Async.Core.liftIO $
+trackChildren scope children = Async.Core.liftIO $
   traverse_ append (scope.children :: scope.ancestors)
   where
     live : List (Fiber [] ()) -> IO (List (Fiber [] ()))
@@ -117,32 +117,32 @@ trackChildren scope children = Flux.Async.Core.liftIO $
 
 addHook : Scope Task -> Task [] () -> Task es ()
 addHook scope action = do
-  done <- Flux.Async.Core.liftIO (newIORef False)
+  done <- Async.Core.liftIO (newIORef False)
   let once = Masked $ do
-        released <- Flux.Async.Core.liftIO (readIORef done)
+        released <- Async.Core.liftIO (readIORef done)
         unless released $ do
-          Flux.Async.Core.liftIO (writeIORef done True)
+          Async.Core.liftIO (writeIORef done True)
           action
-  Flux.Async.Core.liftIO $ do
+  Async.Core.liftIO $ do
     live <- prune !(readIORef scope.hooks)
     writeIORef scope.hooks (MkHook done once :: live)
 
 attachScope : Scope Task -> Scope Task -> Task [] () -> Task es ()
-attachScope parent child cleanup = Flux.Async.Core.liftIO $ do
+attachScope parent child cleanup = Async.Core.liftIO $ do
   live <- prune !(readIORef parent.hooks)
   writeIORef parent.hooks (MkHook child.closed cleanup :: live)
 
 closeScope : Scope Task -> Task [] ()
 closeScope scope = Masked $ do
-  closed <- Flux.Async.Core.liftIO (readIORef scope.closed)
+  closed <- Async.Core.liftIO (readIORef scope.closed)
   unless closed $ do
-    Flux.Async.Core.liftIO (writeIORef scope.closed True)
-    children <- Flux.Async.Core.liftIO (readIORef scope.children)
-    Flux.Async.Core.liftIO (writeIORef scope.children [])
+    Async.Core.liftIO (writeIORef scope.closed True)
+    children <- Async.Core.liftIO (readIORef scope.children)
+    Async.Core.liftIO (writeIORef scope.children [])
     traverse_ RequestCancel children
     traverse_ (ignore . join) children
-    hooks <- Flux.Async.Core.liftIO (readIORef scope.hooks)
-    Flux.Async.Core.liftIO (writeIORef scope.hooks [])
+    hooks <- Async.Core.liftIO (readIORef scope.hooks)
+    Async.Core.liftIO (writeIORef scope.hooks [])
     traverse_ (.action) hooks
 
 mutual
@@ -167,7 +167,7 @@ mutual
       Right (Right (chunk, rest)) => pure (Right (chunk, Att rest))
   step scope (Uncons source) = map Left (step scope source)
   step parent (Scoped source) = do
-    fresh <- Flux.Async.Core.liftIO newScopeIO
+    fresh <- Async.Core.liftIO newScopeIO
     let scope = { ancestors := parent.children :: parent.ancestors } fresh
     attachScope parent scope (closeScope scope)
     step parent (InScope scope source)
@@ -192,8 +192,8 @@ mutual
 
 export
 pull : Pull Task Void es r -> Task [] (Outcome es r)
-pull source = Flux.Async.Core.bracket
-  (Flux.Async.Core.liftIO newScopeIO)
+pull source = Async.Core.bracket
+  (Async.Core.liftIO newScopeIO)
   closeScope
   (\scope => map toOutcome (attempt (finish scope source)))
 
@@ -201,7 +201,7 @@ export
 pullIn : Pull Task Void es r -> Task es r
 pullIn source = do
   result <- weakenErrors (pull source)
-  Flux.Async.Core.fromOutcome result
+  Async.Core.fromOutcome result
 
 export
 mpull : Monoid r => Pull Task Void es r -> Task [] r

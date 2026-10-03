@@ -1,7 +1,7 @@
 module TestService
 
-import Flux.Async.Core
-import Flux.Async.Runner
+import Async.Core
+import Async.Runner
 import TestSupport
 import Data.IORef
 import Data.List

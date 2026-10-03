@@ -2,18 +2,18 @@
 ||| General operations on `Pull`s
 ||| and `Stream`s: Splits, scans, filters, and maps
 |||
-||| It is suggested to import this qualified `import Flux.Stream.Pull as P` or
+||| It is suggested to import this qualified `import Stream.Pull as P` or
 ||| via the catch-all module `FS` and use qualified names such
 ||| as `P.filter` for those functions that overlap with the ones
-||| from `Flux.Stream.Chunk`.
-module Flux.Stream.Pull
+||| from `Stream.Chunk`.
+module Stream.Pull
 
 import Control.Monad.MCancel
 import Control.Monad.Resource
 import Data.Either
 import Data.List
 import Data.List.Quantifiers
-import public Flux.Stream.Core
+import public Stream.Core
 
 import Data.SnocList
 
@@ -64,7 +64,7 @@ eval act = exec act >>= emit
 ||| This allows us to potentially emit a bunch of values right before
 ||| we are done.
 |||
-||| This overlaps with function `Flux.Stream.Chunk.unfold`, so it is typically
+||| This overlaps with function `Stream.Chunk.unfold`, so it is typically
 ||| used qualified: `P.unfold`.
 export
 unfold : (init : s) -> (s -> UnfoldRes r s o) -> Pull f o es r

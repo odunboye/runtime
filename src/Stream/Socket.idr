@@ -1,7 +1,7 @@
-module Flux.Stream.Socket
+module Stream.Socket
 
-import public Flux.Stream
-import public Flux.Async.Socket
+import public Stream
+import public Async.Socket
 import public System.Posix.Errno
 import Data.ByteString
 

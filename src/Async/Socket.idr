@@ -1,6 +1,6 @@
-module Flux.Async.Socket
+module Async.Socket
 
-import public Flux.Async.Core
+import public Async.Core
 import Data.Buffer
 import Data.IORef
 import Data.List

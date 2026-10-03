@@ -1,0 +1,22 @@
+package runtime
+version = 0.1.0
+brief = "An owned-task runtime for Idris2: cooperative scheduling, sockets, and streams"
+depends = elin, bytestring, elab-util, posix
+sourcedir = "src"
+opts = "-i ."
+prebuild = "make native"
+modules = Async.Core
+        , Async.Native
+        , Async.Runner
+        , Async.Socket
+        , Stream.Core
+        , Stream.Pull
+        , Stream.Chunk
+        , Stream.Bytes
+        , Stream.Internal.Bytes
+        , Stream.Resource
+        , Stream
+        , Stream.Socket
+        , Stream.Posix
+        , Async.Server
+        , Async.Standalone

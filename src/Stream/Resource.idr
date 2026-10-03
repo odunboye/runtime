@@ -1,9 +1,9 @@
 -- Adapted from idris2-streams by Stefan Hoeck; see STREAMS_LICENSE.
-module Flux.Stream.Resource
+module Stream.Resource
 
 import public Control.Monad.MCancel
 import public Control.Monad.Resource
-import public Flux.Stream.Pull
+import public Stream.Pull
 
 %default total
 

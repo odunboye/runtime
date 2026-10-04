@@ -103,3 +103,11 @@ ASan/UBSan on both platforms. `test/linux_runtime.sh` builds the Idris tests
 offline from read-only source mounts; `test/linux_native.sh` tests the C shim
 and PG transport. End-to-end Flux/PG and the extended HTTP soak were run on
 macOS; those results do not establish Linux application performance.
+
+## Design history
+
+[`design/RUNTIME_ABSTRACTION.md`](design/RUNTIME_ABSTRACTION.md) and
+[`design/RUNTIME_IMPLEMENTATION.md`](design/RUNTIME_IMPLEMENTATION.md) record
+this package's own scheduler/supervision architecture and implementation
+checkpoint from when it was vendored inside Flux - moved here since they're
+about this package, not Flux.
